@@ -63,12 +63,13 @@
             const playerEl = document.createElement("div");
             playerEl.classList.add("player");
             boardEl.appendChild(playerEl);
+            if (player.id === socket.id) {
+              playerEl.style.border = "2px solid red";
+            }
             player.el = playerEl;
-            player.el.style.background = `#${Math.floor(
-              Math.random() * 16777215
-            ).toString(16)}`;
           }
 
+          playersMap[player.id].el.style.background = player.color;
           playersMap[player.id].el.style.left = `${player.x}px`;
           playersMap[player.id].el.style.top = `${player.y}px`;
         }

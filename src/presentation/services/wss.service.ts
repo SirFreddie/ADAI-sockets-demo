@@ -36,6 +36,7 @@ export class WssService {
       console.log(`Client ${socket.id} connected`);
 
       const player = {
+        color: `#${Math.floor(Math.random() * 16777215).toString(16)}`,
         x: 0,
         y: 0,
         id: socket.id,
@@ -57,10 +58,10 @@ export class WssService {
       for (const player of this.players) {
         const playerControls = this.controlMap[player.id] ?? {};
 
-        if (playerControls["left"]) player.x -= 2;
-        if (playerControls["right"]) player.x += 2;
-        if (playerControls["up"]) player.y -= 2;
-        if (playerControls["down"]) player.y += 2;
+        if (playerControls["left"]) player.x -= 5;
+        if (playerControls["right"]) player.x += 5;
+        if (playerControls["up"]) player.y -= 5;
+        if (playerControls["down"]) player.y += 5;
       }
 
       this.wss.emit("players", this.players);
@@ -71,6 +72,6 @@ export class WssService {
       const now = Date.now();
       tick(now - lastUpdate);
       lastUpdate = now;
-    }, 1000 / 30);
+    }, 1000 / 60);
   }
 }
